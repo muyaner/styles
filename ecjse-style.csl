@@ -1,40 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0">
+<style xmlns="http://purl.org/net/xbiblio/csl"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://purl.org/net/xbiblio/csl http://citationstyles.org/downloads/schema/csl.xsd"
+       version="1.0"
+       class="in-text"
+       default-locale="en-US">
+
   <info>
-    <title>ECJSE Custom IEEE-like Style</title>
-    <id>http://www.zotero.org/styles/ecjse</id>
+    <title>ECJSE Custom IEEE-like</title>
+    <id>http://www.zotero.org/styles/ecjse-custom</id>
+    <link href="http://www.zotero.org/styles/ecjse-custom" rel="self"/>
+    <category citation-format="numeric"/>
+    <updated>2026-03-25T00:00:00+00:00</updated>
   </info>
 
+  <!-- CITATION -->
   <citation collapse="citation-number">
     <layout prefix="[" suffix="]" delimiter=",">
       <text variable="citation-number"/>
     </layout>
   </citation>
 
-  <bibliography>
-    <layout>
-      <text variable="citation-number" prefix="[" suffix="] "/>
-
-      <names variable="author" delimiter=", ">
-        <name name-as-sort-order="all" initialize-with="." delimiter=", "/>
-        <label form="short" prefix=", "/>
-      </names>
-
-      <text variable="title" prefix=", "/>
-
-      <text variable="container-title" prefix=", "/>
-
-      <date variable="issued" prefix=", ">
-        <date-part name="year"/>
-      </date>
-
-      <text variable="volume" prefix=", "/>
-      <text variable="issue" prefix="(" suffix=")"/>
-
-      <text variable="page" prefix=", pp. "/>
-
-      <text variable="DOI" prefix=", DOI: "/>
-    </layout>
-  </bibliography>
-</style>
+  <!-- AUTHOR FORMAT -->
+  <macro name="author">
+    <names variable="author" delimiter=", ">
+      <name name-as-sort-order="all" i
