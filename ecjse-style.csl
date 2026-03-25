@@ -46,13 +46,13 @@
     </contributor>
     <contributor>
       <name>Mesut UYANER</name>
-      <uri></uri>
+      <uri/>
     </contributor>
     <category citation-format="numeric"/>
     <category field="engineering"/>
     <category field="generic-base"/>
     <summary>IEEE style as per the 2023 guidelines.</summary>
-    <updated>2026-03-24T23:18:48+00:00</updated>
+    <updated>2026-03-24T23:33:48+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -99,7 +99,6 @@
     <choose>
       <if type="article-journal report" match="any">
         <date variable="issued">
-          <date-part name="month" form="short" suffix=" "/>
           <date-part name="year" form="long"/>
         </date>
       </if>
@@ -110,8 +109,7 @@
       </else-if>
       <else-if type="paper-conference" match="any">
         <date variable="issued">
-          <date-part name="month" form="short"/>
-          <date-part name="year" prefix=" "/>
+          <date-part name="year" form="long"/>
         </date>
       </else-if>
       <else-if type="motion_picture" match="any">
@@ -166,7 +164,7 @@
   <macro name="title">
     <choose>
       <if type="bill book graphic legal_case legislation motion_picture song standard software" match="any">
-        <text variable="title" font-style="italic"/>
+        <text variable="title"/>
       </if>
       <else>
         <text variable="title" quotes="false"/>
@@ -196,7 +194,7 @@
           <if variable="container-title" match="any">
             <group delimiter=" ">
               <text term="in"/>
-              <text variable="container-title" font-style="italic"/>
+              <text variable="container-title"/>
             </group>
           </if>
           <else>
@@ -209,59 +207,39 @@
       </if>
     </choose>
   </macro>
-  <macro name="access">
-    <choose>
-      <if type="webpage post post-weblog" match="any">
-        <choose>
-          <if variable="URL">
-            <group delimiter=". " prefix=" ">
-              <group delimiter=": ">
-                <text term="accessed" text-case="capitalize-first"/>
-                <date variable="accessed" form="text"/>
-              </group>
-              <text term="online" prefix="[" suffix="]" text-case="capitalize-first"/>
-              <group delimiter=": ">
-                <text term="available at" text-case="capitalize-first"/>
-                <text variable="URL"/>
-              </group>
-              <date date-parts="year" form="text" variable="issued"/>
+<macro name="access">
+  <choose>
+    <if type="webpage post post-weblog" match="any">
+      <choose>
+        <if variable="URL">
+          <group delimiter=", " prefix=" ">
+            <date variable="accessed">
+              <date-part name="year" form="long"/>
+            </date>
+            <group delimiter=" ">
+              <text value="Available from:"/>
+              <text variable="URL"/>
             </group>
-          </if>
-        </choose>
-      </if>
-      <else-if match="any" variable="DOI">
-        <text variable="DOI" prefix=" DOI: " suffix="."/>
-      </else-if>
-      <else-if variable="URL">
-        <group delimiter=". " prefix=" " suffix=". ">
-          <group delimiter=": ">
-            <text term="accessed" text-case="capitalize-first"/>
-            <date variable="accessed" form="text"/>
           </group>
-          <group prefix="[" suffix="]" delimiter=" ">
-            <choose>
-              <if variable="medium" match="any">
-                <text variable="medium" text-case="capitalize-first"/>
-              </if>
-              <else>
-                <text term="online" text-case="capitalize-first"/>
-                <choose>
-                  <if type="motion_picture">
-                    <text term="video" text-case="capitalize-first"/>
-                  </if>
-                </choose>
-              </else>
-            </choose>
-          </group>
-        </group>
-        <group delimiter=": " prefix=" ">
-          <text term="available at" text-case="capitalize-first"/>
+        </if>
+      </choose>
+    </if>
+    <else-if match="any" variable="DOI">
+      <text variable="DOI" prefix=" DOI: " suffix="."/>
+    </else-if>
+    <else-if variable="URL">
+      <group delimiter=", " prefix=" ">
+        <date variable="accessed">
+          <date-part name="year" form="long"/>
+        </date>
+        <group delimiter=" ">
+          <text value="Available from:"/>
           <text variable="URL"/>
         </group>
-      </else-if>
-    </choose>
-  </macro>
-  <macro name="page">
+      </group>
+    </else-if>
+  </choose>
+</macro>  <macro name="page">
     <choose>
       <if type="article-journal" variable="number" match="all">
         <group delimiter=" ">
@@ -370,7 +348,7 @@
             <text macro="title"/>
             <group delimiter=" ">
               <text term="in" suffix=" "/>
-              <text variable="container-title" font-style="italic"/>
+              <text variable="container-title"/>
             </group>
             <text macro="locators"/>
             <text macro="editor"/>
@@ -420,17 +398,14 @@
             <text macro="title"/>
             <text macro="issued"/>
             <group delimiter=": ">
-              <text macro="publisher" font-style="italic"/>
+              <text macro="publisher"/>
               <text variable="number"/>
             </group>
           </group>
           <text macro="access"/>
         </else-if>
         <else-if type="webpage post-weblog post" match="any">
-          <group delimiter=", " suffix=".">
-            <text macro="title"/>
-            <text variable="container-title"/>
-          </group>
+          <text macro="author" suffix=", "/>
           <text macro="access"/>
         </else-if>
         <else-if type="patent">
@@ -477,7 +452,7 @@
         <else-if type="article-magazine article-newspaper broadcast interview manuscript map patent personal_communication song speech thesis webpage" match="any">
           <group delimiter=", " suffix=".">
             <text macro="title"/>
-            <text variable="container-title" font-style="italic"/>
+            <text variable="container-title"/>
             <text macro="locators"/>
             <text macro="publisher"/>
             <text macro="page"/>
@@ -488,7 +463,7 @@
         <else>
           <group delimiter=", " suffix=". ">
             <text macro="title"/>
-            <text variable="container-title" font-style="italic"/>
+            <text variable="container-title"/>
             <text macro="locators"/>
           </group>
           <text macro="collection"/>
